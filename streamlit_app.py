@@ -4,7 +4,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # Load environment variables
-load_dotenv()
+
 
 # Configure the Generative AI model
 genai.configure(api_key=("AIzaSyDU5ze5H_6H2TFqrbha_S0uUrloxkMf3S4"))  # Ensure you use the API key securely
