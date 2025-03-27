@@ -44,7 +44,7 @@ def get_gemini_response(question):
 
 # Streamlit App UI Configuration
 st.set_page_config(page_title="Chat with SmartyBot! 🤖✨", page_icon="🤖")
-st.title("SmartyBot 🤖 - Your Funny Learning Buddy!")
+st.title("SmartyBot Streamlit 🤖 - Your Funny Learning Buddy!")
 st.subheader("Ask me anything fun and educational! 🎉")
 
 st.sidebar.header("📜 Chat History")
