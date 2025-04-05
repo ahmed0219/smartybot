@@ -19,7 +19,7 @@ if "score" not in st.session_state:
 if "answers" not in st.session_state:  # Initialize answers if not already done
     st.session_state.answers = {}
 
-st.title("📄 PaperTutor – Learn, Chat & Quiz")
+st.title("📄 Streamlit PaperTutor – Learn, Chat & Quiz")
 
 # Upload Paper
 uploaded_file = st.file_uploader("Upload a research paper (PDF)", type=["pdf"])
