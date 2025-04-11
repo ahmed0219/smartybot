@@ -4,7 +4,7 @@ from GeminiEmbeddingFunction import GeminiEmbeddingFunction
 import chromadb
 
 # === CONFIGURATION ===
-DB_NAME = "white_papers1"
+DB_NAME = "white_papers_db"
 PDF_DIR = "pdf"  # your folder of PDFs
 # === INIT EMBEDDING FUNCTION ===
 embed_fn = GeminiEmbeddingFunction()
@@ -12,7 +12,7 @@ embed_fn.document_mode = True
 
 # === INIT CHROMADB ===
 try:
-    chroma_client = chromadb.PersistentClient(path="./newchroma_db")
+    chroma_client = chromadb.PersistentClient(path="./chroma_db")
     db = chroma_client.create_collection(name=DB_NAME, embedding_function=embed_fn)
     print(f"✅ Collection '{DB_NAME}' initialized.")
 except Exception as e:
