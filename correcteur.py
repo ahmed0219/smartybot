@@ -1,19 +1,28 @@
 from gemini import model
-def corrector_expert(user_answer, correct_answer, paper_text):
+
+def corrector_expert(user_answer, correct_answer):
     prompt = f"""
-    You are an AI corrector designed to compare the user's answers with the correct answers.
-    Instructions:
-    1. Compare the user answer with the correct answer.
-    2. If the answer is correct, return "Correct!"
-    3. If the answer is incorrect, return "Incorrect! and explain why according to the paper."
-    User answer: {user_answer}
-    Correct answer: {correct_answer}
-    Paper context: {paper_text}
-    """
-    # Ideally, you would send this prompt to the LLM (Gemini) here and return the response.
-    # For now, let's assume the AI provides a response based on the above input.
-    # This can be connected with the gemini API in the real implementation.
-    
-    # Sample response for illustration purposes
+You are a grading assistant.
+
+Compare the student's answer to the correct answer and return:
+- whether the answer is correct (True/False)
+- a brief explanation
+
+Student Answer: {user_answer}
+Correct Answer: {correct_answer}
+
+Respond in this format:
+{{"correct": true/false, "feedback": "explanation here"}}
+"""
     response = model.generate_content(prompt).text
-    return response
+
+    import json, re
+    try:
+        # Extract only the JSON object using regex (more reliable than stripping backticks)
+        json_match = re.search(r'\{.*\}', response, re.DOTALL)
+        if json_match:
+            return json.loads(json_match.group(0))
+        else:
+            raise ValueError("No JSON found in response.")
+    except Exception as e:
+        return {"correct": False, "feedback": f"Could not parse feedback. Error: {e}"}
